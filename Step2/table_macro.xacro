@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="table" params="prefix parent *origin">
+
+    <!-- Constants for robot dimensions -->
+    <xacro:property name="table_width" value="1" /> 
+    <xacro:property name="table_length" value = "2"/>
+    <xacro:property name="table_height" value = "1"/>
+    <xacro:property name="table_thickness" value = "0.05"/>
+
+    <xacro:property name="leg_length" value="{table_height - table_thickness" /> <!-- base_link -->
+    <xacro:property name="leg_radius" value="0.05" /> <!-- link1 -->
+    
+
+    <joint name="${prefix}top" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}top" />
+    </joint>
+
+    <!-- Top -->
+    <link name="${prefix}top">
+      <visual>
+        <origin xyz="0 0 ${table_height}" rpy="0 0 0" />
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}" />
+        </geometry>
+        <material name="brown" />
+      </visual>
+    </link>
+
+    <joint name="${prefix}leg1" type="continuous">
+      <parent link="${prefix}top" />
+      <child link="${prefix}leg1" />
+      <origin xyz="0 ${width} ${height0 - axel_offset}" rpy="0 0 0" />
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <!-- leg 1 -->
+    <link name="${prefix}leg1">
+      <visual>
+        <origin xyz="${table_height/2} ${table_width/2} ${height1/2 - axel_offset}" rpy="0 0 0" />
+        <geometry>
+          <box size="${width} ${width} ${height1}" />
+        </geometry>
+        <material name="light_grey" />
+      </visual>
+    </link>
+
+    
+
+  </xacro:macro>
+
+</robot>
