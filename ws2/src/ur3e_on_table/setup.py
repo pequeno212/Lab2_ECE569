@@ -16,6 +16,8 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob('launch/*')),
         (os.path.join('share', package_name, 'rviz'), glob('rviz/*')),
         (os.path.join('share', package_name, 'urdf'), glob('urdf/*')),
+        (os.path.join('share', package_name, 'data'), glob('data/*')),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,6 +32,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'test = ur3e_on_table.joint_publisher_test:main',
+            'lissajous = ur3e_on_table.joint_publisher_lissajous:main',
+            'pick-and-place = ur3e_on_table.joint_publisher_pick_and_place:main',
         ],
     },
 )
